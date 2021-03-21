@@ -17,7 +17,7 @@ def get_emoji(hour: str) -> str:
 
 def get_time_string() -> str:
     tz = pytz.timezone('Europe/Berlin')
-    time = datetime.now(tz).strftime('%H:%M:%S')
+    time = datetime.now(tz).strftime('%H:%M')
     return time
 
 
