@@ -4,6 +4,7 @@ from os import getenv
 
 load_dotenv()
 token = getenv('TOKEN')
+channel_name = getenv('CHANNEL_NAME')
 
 bot = commands.Bot(command_prefix='?')
 

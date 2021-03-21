@@ -1,0 +1,1 @@
+worker: python -m clock_bot.py
