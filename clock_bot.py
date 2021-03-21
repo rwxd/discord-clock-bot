@@ -2,6 +2,7 @@ from discord.ext import commands, tasks
 from dotenv import load_dotenv
 from os import getenv
 from datetime import datetime
+import pytz
 
 load_dotenv()
 token = getenv('TOKEN')
@@ -15,11 +16,12 @@ def get_emoji(hour: str) -> str:
 
 
 def get_time_string() -> str:
-    time = datetime.now().strftime('%H:%M:%S')
+    tz = pytz.timezone('Europe/Berlin')
+    time = datetime.now(tz).strftime('%H:%M:%S')
     return time
 
 
-@tasks.loop(seconds=50)
+@ tasks.loop(seconds=60)
 async def change_time() -> None:
     string = get_time_string()
     channel = bot.get_channel(int(channel_id))
@@ -30,7 +32,7 @@ async def change_time() -> None:
         print(e)
 
 
-@bot.event
+@ bot.event
 async def on_ready():
     change_time.start()
     print(f'Bot runs as {bot.user.name}')
